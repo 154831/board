@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+	<mapper namespace="com.ktdsuniversity.edu.bbs.dao.Board2DAO">
+	<!--  조회 쿼리 실행 단계  -->
+	
+	<select  id= "getBoardAllCount2"
+	resultType = "_int">
+		  SELECT COUNT(1)
+ 			FROM BOARD
+		
+	</select>
+	
+	<select  id= "getAllBoard2"
+	resultType = "com.ktdsuniversity.edu.bbs.vo.Board2VO">
+		SELECT ID
+	    	 , SUBJECT
+			 , CONTENT
+			 , EMAIL
+			 , VIEW_CNT
+			 , TO_CHAR(CRT_DT, 'YYYY-MM-DD')CRT_DT
+			 , TO_CHAR(MDFY_DT, 'YYYY-MM-DD') MDFY_DT
+			 , FILE_NAME
+			 , ORIGIN_FILE_NAME
+		  FROM BOARD
+		 ORDER BY ID DESC 
+		 
+	</select>
+	
+	<insert id="createNewBoard2"
+		parameterType="_int">
+	 INSERT INTO BOARD 
+		    (ID
+	      , SUBJECT
+		  , CONTENT
+		  , EMAIL
+		  , VIEW_CNT
+		  , CRT_DT
+		  , MDFY_DT
+		  , FILE_NAME
+		  , ORIGIN_FILE_NAME)
+    VALUES
+		   (SEQ_BOARD_PK.NEXTVAL
+		  , #{subject}
+		  , #{content}
+		  , #{email}
+		  , 0
+		  , SYSDATE
+		  , SYSDATE
+		  , #{fileName}
+		  , #{originFileName})
+			
+	
+	</insert>
+	
+	</mapper>
