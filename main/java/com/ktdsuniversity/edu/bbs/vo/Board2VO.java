@@ -60,10 +60,10 @@ public class Board2VO {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public String getOriginFileName() {
+	public String getoriginFileName() {
 		return originFileName;
 	}
-	public void setOriginFileName(String originFileName) {
+	public void setoriginFileName(String originFileName) {
 		this.originFileName = originFileName;
 	}
 	

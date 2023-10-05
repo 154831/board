@@ -27,7 +27,13 @@ public interface BoardService {
 	public BoardVO getOneBoard(int id, boolean isIncrease);
 	
 	
-	public boolean updateOneBoard(BoardVO boardVO);
+	/**
+	 * BoardVO 의 id 값에 수정할 게시글의 id값이 있어야한다. 
+	 * @param boardVO 사용자가 수정한 게시글의 정보
+	 * @param file 사용자가 업로드한 파일(기존파일 존재시 삭제 후 신규등록)
+	 * @return
+	 */
+	public boolean updateOneBoard(BoardVO boardVO, MultipartFile file);
 	
 	/**
 	 * 파라미터로 전달받은 게시글 id의 게시글을 삭제한다.

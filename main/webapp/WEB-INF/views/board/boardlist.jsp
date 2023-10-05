@@ -55,18 +55,18 @@ pageEncoding="UTF-8"%>
 	div.grid {
 		display: grid;
 		grid-template-columns: 1fr ;
-		grid-template-rows: 28px 1fr 28px;
+		grid-template-rows: 28px 28px 1fr 28px;
 		row-gap: 10px;
-	}
-
-	div.grid div.right-align {
-		text-align: right;
 	}
 
 </style>
 </head>
 <body>
 	<div class="grid">
+		<jsp:include page="../member/membermenu.jsp"></jsp:include>
+
+
+
 		<div class="right-align">
 			총 ${boardList.boardCnt} 건의 게시글이 검색되었습니다.
 		</div>
@@ -94,7 +94,7 @@ pageEncoding="UTF-8"%>
 									<c:out value="${board.subject}"/>
 									</a>
 								</td>
-								<td><c:out value="${board.email}"/></td>
+								<td>${board.memberVO.name}(${board.email})</td>
 								<td>${board.viewCnt}</td>
 								<td>${board.crtDt}</td>
 								<td>${board.mdfyDt}</td>
@@ -109,9 +109,12 @@ pageEncoding="UTF-8"%>
 				</c:choose>
 			</tbody>
 		</table>
-		<div class = "right-align">
-			<a href="/board/write">게시글 등록</a>
-		</div>
+		<c:if test="${not empty sessionScope._LOGIN_USER_}">
+			<div class = "right-align">
+			<a href ="/board/excel/download"> 엑셀 다운로드 </a>
+				<a href="/board/write">게시글 등록</a>
+			</div>
+		</c:if>
 	</div>
 </body>
 </html>

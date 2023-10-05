@@ -52,6 +52,8 @@ public class HelloBootController {
 		model.addAttribute("myname", "Cafe Demo");
 		return "helloboot";
 	}
+	
+	//@GetMapping("/saleslist")
 		
 	}
 

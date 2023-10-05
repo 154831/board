@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 
@@ -32,22 +33,48 @@
 			padding:10px;
 		}
 		
+		input[type=file] {
+		padding: 0px;
+		}
+		
+		div.errors {
+		background-color: #ff00004a;
+		opacity: 0.8;
+		padding: 10px;
+		color: #333;
+		}
+		
+		div.errors:last-child {
+			margin-bottom: 15px;
+		}
+		
 	</style>
 	
 </head>
 <body>
 
-	<h1> 게시글 작성 </h1>
-	<form method = "post" action="/board/modify">
+	<jsp:include page="../member/membermenu.jsp"></jsp:include>
+
+	<h1> 게시글 수정 </h1>
+	<form:form modelAttribute="boardVO" method = "post" action="/board/modify" enctype="multipart/form-data">
+		<div>
+			<form:errors path="subject" element="div" cssClass="errors"/>
+			<form:errors path="content" element="div" cssClass="errors"/>
+		</div>
+		
+		
 		<input type="hidden" name="id" value="${boardVO.id}"/>
 		<div class = "grid">
 			<label for = "subject"> 제목 </label>
 			<input id = "subject" type = "text" name="subject"
 			value="${boardVO.subject}"/>
 			
-			<label for = "email"> 이메일 </label>
-			<input id = "email" type = "email" name = "email" 
-			value="${boardVO.email}"/>
+			
+			<label for = "file"> 첨부파일 </label>
+			<div>
+				<input type="file" id="file" name="file"/>
+				현재 업로드 된 파일: ${boardVO.originFileName}
+			</div>
 			
 			<label for = "content"> 내용 </label>
 			<textarea id ="content" 
@@ -59,7 +86,7 @@
 				</div>
 			</div>
 		</div>
-	</form>
+	</form:form>
 	
 </body>
 </html>

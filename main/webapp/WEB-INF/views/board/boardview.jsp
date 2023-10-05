@@ -38,6 +38,8 @@
 </style>
 </head>
 <body>
+
+<jsp:include page="../member/membermenu.jsp"></jsp:include>
     <h1>게시글 작성</h1>
     <div class="grid">
 
@@ -45,7 +47,8 @@
         <div>${boardVO.subject}</div>
         
         <label for="email">메일</label>
-        <div>${boardVO.email}</div>
+        <div>${boardVO.email}/${boardVO.ipAddr}</div>
+        
         
         <label for="viewCnt">조회수</label>
         <div>${boardVO.viewCnt}</div>
@@ -54,7 +57,9 @@
         <div>${boardVO.content}</div>
         
         <label for=file>첨부파일</label>
-        <div>${boardVO.originFileName} </div>
+        <div>
+        	<a href = "/board/file/download/${boardVO.id }">${boardVO.originFileName}</a> 
+        </div>
         
         <label for=file>encrypted</label>
         <div>${boardVO.fileName}</div>
@@ -65,13 +70,15 @@
 
         <label for="mdfyDt">수정일</label>
         <div>${boardVO.mdfyDt}</div>
-
-        <div class="btn-group">
-            <div class="right-align">
-                <a href="/board/modify/${boardVO.id}">수정</a>
-                <a href="/board/delete/${boardVO.id}">삭제</a>
-            </div>
-        </div>
+		<c:if text="${not empty sessionScope._LOGIN_USER_ && sessionScope._LOGIN_USER_.email eq boardVO.memberVO.email}">
+		<!-- 세션 스콥 로그인 되어있는지, 세션 스콥의 유저와 글작성자가 같다면 확인 -->
+	        <div class="btn-group">
+	            <div class="right-align">
+	                <a href="/board/modify/${boardVO.id}">수정</a>
+	                <a href="/board/delete/${boardVO.id}">삭제</a>
+	            </div>
+	        </div>
+        </c:if>
     </div>
 </body>
 </html>

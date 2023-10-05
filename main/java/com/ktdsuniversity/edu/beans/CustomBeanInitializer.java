@@ -46,5 +46,10 @@ public class CustomBeanInitializer {
 		fileHandler.setEnabeObfuscationHideExt(enableObfuscationHideExt);
 		return fileHandler;
 	}
+	
+	@Bean
+	public SHA sha() {
+		return new SHA();
+	}
 }
 
